@@ -9,6 +9,7 @@ function DnD(canvas, interactor) {
   mousePressed = false;
   
   DnD.prototype.pickUp = function(evt) {
+    interactor.interactionStart(this);
     mousePressed = true;
     pos = getMousePosition(canvas, evt);
     xInit = pos.x;
@@ -18,6 +19,7 @@ function DnD(canvas, interactor) {
 
   DnD.prototype.move = function(evt){
     if(mousePressed){
+      interactor.interactionUpdate(this);
       mousePos = getMousePosition(canvas, evt);
       console.log(mousePos.x + ", " + mousePos.y);
     } 
@@ -25,6 +27,7 @@ function DnD(canvas, interactor) {
   
   DnD.prototype.drop = function(evt){
     if(mousePressed){
+      interactor.interactionEnd(this); ​
       pos = getMousePosition(canvas, evt);
       xFinal = pos.x;
       yFinal = pos.y;
@@ -48,3 +51,17 @@ function getMousePosition(canvas, evt) {
     y: evt.clientY - rect.top
   };
 };
+
+function Interactor(){
+  Interactor.prototype.interactionStart = function(){
+    
+  }
+  
+  Interactor.prototype.interactionUpdate = function(){
+    
+  }
+  
+  Interactor.prototype.interactionEnd = function(){
+    
+  }
+}

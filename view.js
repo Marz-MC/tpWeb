@@ -1,7 +1,8 @@
 
 // Implémenter ici les fonctions paint à ajouter dans chacune des classes du modèle.
 Rectangle.prototype.paint = function(ctx) {
-    //TODO Manager color
+    ctx.beginPath();
+    Shape.prototype.paint.call(this, ctx);
     ctx.rect(this.getInitX(), this.getInitY(), this.getWidth(), this.getHeight());
     ctx.stroke();
 };
@@ -9,6 +10,7 @@ Rectangle.prototype.paint = function(ctx) {
 Line.prototype.paint = function(ctx) {
     //TODO Manager color
     ctx.beginPath();
+    Shape.prototype.paint.call(this, ctx);
     ctx.moveTo(this.getInitX(), this.getInitY());
     ctx.lineTo(this.getFinalX(), this.getFinalY());
     ctx.stroke();
@@ -23,3 +25,8 @@ Drawing.prototype.paint = function(ctx) {
         eltDuTableau.paint(ctx);
     });
 };
+
+Shape.prototype.paint = function(ctx) {
+    ctx.lineWidth = this.thickness;
+    ctx.strokeStyle = this.color;
+}

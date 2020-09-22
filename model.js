@@ -14,8 +14,8 @@ function Shape(color, thickness){
     this.color = color;
 }
 
-function Rectangle(color, thickness, x1, y1, x2, y2){
-    Shape.call(this, color, thickness);
+function Rectangle(x1, y1, x2, y2, thickness, color){
+    Shape.call(this, color, thickness); 
     hauteur = y2;
     largeur = x2;
     this.x1 = x1;
@@ -38,7 +38,7 @@ function Rectangle(color, thickness, x1, y1, x2, y2){
 }
 Rectangle.prototype = new Shape();
 
-function Line(color, thickness, x1, y1, x2, y2){
+function Line(x1, y1, x2, y2, thickness, color){
     Shape.call(this, color, thickness);
     this.x1 = x1;
     this.y1 = y1;
