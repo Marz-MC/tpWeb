@@ -2,11 +2,11 @@
 // La création d'un Dnd requière un canvas et un interacteur.
 // L'interacteur viendra dans un second temps donc ne vous en souciez pas au départ.
 function DnD(canvas, interactor) {
-	var xInit = 0;
-  var yInit = 0;
-  var xFinal = 0;
-  var yFinal = 0;
-  var mousePressed = false;
+	xInit = 0;
+  yInit = 0;
+  xFinal = 0;
+  yFinal = 0;
+  mousePressed = false;
   
   DnD.prototype.pickUp = function(evt) {
     mousePressed = true;
