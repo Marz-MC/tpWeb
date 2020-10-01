@@ -16,9 +16,11 @@ function Pencil(ctx, drawing, canvas) {
 		switch (this.currEditingMode) {
 			case editingMode.rect:
 				this.currentShape = new Rectangle(dnd.xInit, dnd.yInit, dnd.xFinal-dnd.xInit, dnd.yFinal-dnd.yFinal, this.currLineWidth, this.currColour);
+				this.currentShape.paint(ctx);
 				break;
 			case editingMode.line:
 				this.currentShape = new Line(dnd.xInit, dnd.yInit, dnd.xFinal, dnd.yFinal, this.currLineWidth, this.currColour);
+				this.currentShape.paint(ctx);
 				break;
 			default:
 				break;
@@ -28,18 +30,18 @@ function Pencil(ctx, drawing, canvas) {
   
 	Pencil.prototype.interactionUpdate = function(dnd){
 		drawing.paint(ctx);
-	//	console.log(drawing.getShapes());
+		console.log(drawing.getShapes());
 		switch (this.currEditingMode) {
 			case editingMode.rect:
 				this.currentShape.width = dnd.xFinal-dnd.xInit;
-			//	console.log(this.currentShape.width);
+				console.log(this.currentShape.width);
 				this.currentShape.height = dnd.yFinal-dnd.yInit;
 				this.currentShape.paint(ctx);
 				break;
 			case editingMode.line:
 				this.currentShape.x2 = dnd.xFinal;
-			//	console.log(dnd.xFinal);
-			//	console.log(this.currentShape.x2);
+				console.log(dnd.xFinal);
+				console.log(this.currentShape.x2);
 				this.currentShape.y2 = dnd.yFinal;
 				this.currentShape.paint(ctx);
 				break;

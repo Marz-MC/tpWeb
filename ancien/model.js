@@ -13,29 +13,29 @@ function Drawing(){
     }
 }
 
-function Shape(thickness, color){
+function Shape(color, thickness){
     this.thickness = thickness;
     this.color = color;
 }
 
 function Rectangle(x1, y1, x2, y2, thickness, color){
-    Shape.call(this, thickness, color);
+    Shape.call(this, color, thickness);
     this.x1 = x1;
     this.y1 = y1;
     this.width = x2;
     this.height = y2;
 
     Rectangle.prototype.getInitX = function(){
-        return this.x1;
+        return x1;
     }
     Rectangle.prototype.getInitY = function(){
-        return this.y1;
+        return y1;
     }
     Rectangle.prototype.getWidth = function(){
-        return  this.width;
+        return x2;
     }
     Rectangle.prototype.getHeight = function(){
-        return this.height;
+        return y2;
     }
 }
 Rectangle.prototype = new Shape();
@@ -47,16 +47,16 @@ function Line(x1, y1, x2, y2, thickness, color){
     this.x2 = x2;
     this.y2 = y2;
     Line.prototype.getInitX = function(){
-        return this.x1;
+        return x1;
     }
     Line.prototype.getInitY = function(){
-        return this.y1;
+        return y1;
     }
     Line.prototype.getFinalX = function(){
-        return this.x2;
+        return x2;
     }
     Line.prototype.getFinalY = function(){
-        return this.y2;
+        return y2;
     }
 }
 Line.prototype = new Shape();

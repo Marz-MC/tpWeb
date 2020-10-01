@@ -1,47 +1,48 @@
 
-// La création d'un Dnd requière un canvas et un interacteur.
-// L'interacteur viendra dans un second temps donc ne vous en souciez pas au départ.
+// La création d'un Dnd requiert un canvas et un interacteur.
 function DnD(canvas, interactor) {
-	xInit = 0;
-  yInit = 0;
-  xFinal = 0;
-  yFinal = 0;
-  mousePressed = false;
-  
-  DnD.prototype.pickUp = function(evt) {
-    interactor.interactionStart(this);
-    mousePressed = true;
-    pos = getMousePosition(canvas, evt);
-    xInit = pos.x;
-    yInit = pos.y;
-    console.log(xInit + ", " + yInit);
-  }
+  this.xInit = 0;
+  this.yInit = 0;
+  this.xFinal = 0;
+  this.yFinal = 0;
+  this.mousePressed = false;
+  this.pencil = interactor;
 
-  DnD.prototype.move = function(evt){
-    if(mousePressed){
-      interactor.interactionUpdate(this);
+  this.pickUp = function(evt) {
+    this.mousePressed = true;
+    pos = getMousePosition(canvas, evt);
+    this.xInit = pos.x;
+    this.yInit = pos.y;
+    this.xFinal = pos.x;
+    this.yFinal = pos.y;
+    this.pencil.interactionStart(this);
+  }.bind(this);
+
+  this.move = function(evt){
+    if(this.mousePressed){
       mousePos = getMousePosition(canvas, evt);
-      console.log(mousePos.x + ", " + mousePos.y);
-    } 
-  }
-  
-  DnD.prototype.drop = function(evt){
-    if(mousePressed){
-      interactor.interactionEnd(this); ​
-      pos = getMousePosition(canvas, evt);
-      xFinal = pos.x;
-      yFinal = pos.y;
-      console.log(xFinal + ", " + yFinal);
-      mousePressed = false;
+      this.xFinal = mousePos.x;
+      this.yFinal = mousePos.y;
+      this.pencil.interactionUpdate(this);
     }
+  }.bind(this);
+
+  this.drop = function(evt){
+  if(this.mousePressed){
+    pos = getMousePosition(canvas, evt);
+    this.xFinal = pos.x;
+    this.yFinal = pos.y;
+    this.pencil.interactionEnd(this);
+    this.mousePressed = false;
   }
+  }.bind(this);
 
   // Associer les fonctions précédentes aux évènements du canvas.
   canvas.addEventListener('mousedown', this.pickUp, false);
   canvas.addEventListener('mousemove', this.move, false);
   canvas.addEventListener('mouseup', this.drop, false);
-};
 
+};
 
 // Place le point de l'événement evt relativement à la position du canvas.
 function getMousePosition(canvas, evt) {
@@ -51,17 +52,3 @@ function getMousePosition(canvas, evt) {
     y: evt.clientY - rect.top
   };
 };
-
-function Interactor(){
-  Interactor.prototype.interactionStart = function(){
-    
-  }
-  
-  Interactor.prototype.interactionUpdate = function(){
-    
-  }
-  
-  Interactor.prototype.interactionEnd = function(){
-    
-  }
-}
